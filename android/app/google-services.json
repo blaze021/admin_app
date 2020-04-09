@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "589832825938",
+    "firebase_url": "https://cyrush-ff99a.firebaseio.com",
+    "project_id": "cyrush-ff99a",
+    "storage_bucket": "cyrush-ff99a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:589832825938:android:9c83e3b7ea72e0bcf9038b",
+        "android_client_info": {
+          "package_name": "blaze021.github.io.admin_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "589832825938-bvig412bga8ednoqges0frjps7oq4qs8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "blaze021.github.io.admin_app",
+            "certificate_hash": "356cd039a1ce1e4e888ec6f0c1a781fb7d738f2f"
+          }
+        },
+        {
+          "client_id": "589832825938-usrl19l8eifobmc6vmtloia8s2r2mh2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfT0AX_aIq_iT_kNbi01Ye872hflt3w2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "589832825938-usrl19l8eifobmc6vmtloia8s2r2mh2e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "589832825938-6sri9r5hvunb969d89trkbqn2p3ru1uc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "blaze021.github.io.cyRush"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:589832825938:android:19fc7d7f3b823e8ff9038b",
+        "android_client_info": {
+          "package_name": "blaze021.github.io.cy_rush"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "589832825938-etj4i5hj793bmmopubo3ruucua4bbl7m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "blaze021.github.io.cy_rush",
+            "certificate_hash": "356cd039a1ce1e4e888ec6f0c1a781fb7d738f2f"
+          }
+        },
+        {
+          "client_id": "589832825938-usrl19l8eifobmc6vmtloia8s2r2mh2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfT0AX_aIq_iT_kNbi01Ye872hflt3w2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "589832825938-usrl19l8eifobmc6vmtloia8s2r2mh2e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "589832825938-6sri9r5hvunb969d89trkbqn2p3ru1uc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "blaze021.github.io.cyRush"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
