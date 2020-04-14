@@ -1,5 +1,6 @@
-import 'package:admin_app/models/user_reg_details.dart';
+import 'package:admin_app/models/add_asset.dart';
 import 'package:admin_app/models/user.dart';
+import 'package:admin_app/models/user_reg_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
@@ -8,6 +9,7 @@ class DatabaseService {
   DatabaseService({ this.uid });
 
   // collection reference
+  final CollectionReference addOrderCollection = Firestore.instance.collection('addOrder');
   final CollectionReference userRegDetailCollection = Firestore.instance.collection('userRegDetails');
   final CollectionReference userHealthInfoCollection = Firestore.instance.collection('userHealthInfo');
 
@@ -35,7 +37,33 @@ class DatabaseService {
     });
   }
 
+  Future<void> updateOrder(String itemId,String assetName,String assetDesc,String assetType,String assetMfd,String uploadedFileURL) async {
+    return await addOrderCollection.document(uid).setData({
+      'itemID':itemId,
+      'assetName':assetName,
+      'assetDesc':assetDesc,
+      'assetType':assetType,
+      'assetMfd':assetMfd,
+      'uploadedFileURL':uploadedFileURL,
+    });
+  }
+
+
   // brew list from snapshot
+  List<AddOrder> _addOderListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc){
+      //print(doc.data);
+      return AddOrder(
+        itemId: doc.data['itemID'] ?? '',
+        assetName: doc.data['assetName'] ?? '',
+        assetDesc: doc.data['assetDesc'] ?? '',
+        assetType: doc.data['assetType'] ?? 'None',
+        assetMfd: doc.data['assetMfd'] ?? 'MM/YYYY',
+        uploadedFileURL: doc.data['uploadedFileURL'] ?? 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwallhere.com%2Fen%2Fwallpaper%2F231302&psig=AOvVaw2JnW3Wb0Qa5iTw8JUf9u_Z&ust=1586509677764000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIDq2KL_2ugCFQAAAAAdAAAAABAI',
+      );
+    }).toList();
+  }
+
   List<UserRegDetails> _userRegDetailsListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc){
       //print(doc.data);
@@ -68,12 +96,11 @@ class DatabaseService {
 
   User _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return User(
-        uid:snapshot.data['uid'],
+      uid:snapshot.data['uid'],
     );
   }
 
-
-  // get userRegistrationDetails stream
+// get userRegistrationDetails stream
   Stream<List<UserRegDetails>> get userRegistrationDetails {
     return userRegDetailCollection.snapshots()
         .map(_userRegDetailsListFromSnapshot);
@@ -91,5 +118,10 @@ class DatabaseService {
         .map(_userDataFromSnapshot);
   }
 
+   // get addedOrderDetails stream
+  Stream<List<AddOrder>> get addedOrderDetails {
+    return addOrderCollection.snapshots()
+        .map(_addOderListFromSnapshot);
+  }
 
 }
