@@ -1,8 +1,9 @@
-class AddNormalService{
+class AddFreeService{
   final String serviceName;
   final String serviceDesc;
   final int serviceDuration;
-  AddNormalService({this.serviceName,this.serviceDesc,this.serviceDuration});
+  final int serviceAmount;
+  AddFreeService({this.serviceName,this.serviceDesc,this.serviceDuration,this.serviceAmount});
 }
 
 class AddPremiumService{

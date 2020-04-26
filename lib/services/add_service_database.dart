@@ -8,6 +8,7 @@ class AddServiceDatabase{
   final CollectionReference normalServiceCollection = Firestore.instance.collection('normalService');
   final CollectionReference premiumServiceCollection = Firestore.instance.collection('premiumService');
 
+
   Future<void> updateCategoryService(String serviceType,String serviceName, String serviceDesc,int packageDuration, int packageAmount) async {
     if(serviceType == 'ServiceType.normalService'){
       return await normalServiceCollection.document(categoryServiceName).setData({
@@ -28,6 +29,7 @@ class AddServiceDatabase{
       });
     }
   }
+
 
   List<ServiceModule> _addCategoryServiceListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc){

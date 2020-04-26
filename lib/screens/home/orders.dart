@@ -15,14 +15,15 @@ class _OrdersState extends State<Orders> {
     return Scaffold(
       backgroundColor: Colors.deepOrange,
       body: MultiProvider(
-       providers: [
-         StreamProvider<List<AddOrder>>.value(value: DatabaseService().addedOrderDetails),
-       ],
+        providers: [
+          StreamProvider<List<AddOrder>>.value(
+              value: DatabaseService().addedOrderDetails),
+        ],
         child: Center(
           child: SizedBox(
             width: (MediaQuery.of(context).size.width) * 0.95,
             height: (MediaQuery.of(context).size.height) * 0.95,
-            child: OrderGrid(),
+            child: Container(color: Colors.amber, child: OrderGrid()),
           ),
         ),
       ),

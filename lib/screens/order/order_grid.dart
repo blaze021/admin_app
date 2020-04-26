@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:admin_app/screens/service/show_free_service.dart';
+import 'package:admin_app/screens/service/show_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +11,7 @@ class OrderGrid extends StatefulWidget {
 }
 
 class _OrderGridState extends State<OrderGrid> {
-  String assetName, assetType, assetMfd, itemID, assetDesc, uploadedFileURL;
+  //String assetName, assetType, assetMfd, itemID, assetDesc, uploadedFileURL;
 
   @override
   Widget build(BuildContext context) {
@@ -21,41 +23,63 @@ class _OrderGridState extends State<OrderGrid> {
           case ConnectionState.waiting:
             return Center(child: new Text('Loading...'));
           default:
-            return new ListView(
-              children:
-                  snapshot.data.documents.map((DocumentSnapshot document) {
-                return Container(
-                  color: Colors.yellow,
-                  width:MediaQuery.of(context).size.width*0.95,
-                  height: MediaQuery.of(context).size.height*0.95,
-                  child: Stack(
-                    children: <Widget>[
-                      SizedBox(
-                        width:MediaQuery.of(context).size.width/3,
-                          height: MediaQuery.of(context).size.width/3,
-                          child: Image.network(document['uploadedFileURL'])),
-                      Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Column(
-                          children: <Widget>[
-                            Text(document['assetMfd']),
-                            SizedBox(height:2),
-                            Text(document['assetName']),
-                          ],
-                        ),
-                      ),
-                      Align(
-                          alignment: Alignment.topCenter,
-                          child: Text(document['itemID'])
-                      ),
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: new GridView(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                children: snapshot.data.documents.map((
+                    DocumentSnapshot document) {
+                  return GridAssetTile(assetName: document['assetName'],
+                    assetId: document['itemID'],
+                    uploadedURL: document['uploadedFileURL'],
+                    assetMfd: document['assetMfd'],);
+                }).toList(),
 
-                    ],
-                  ),
-                );
-              }).toList(),
+              ),
             );
         }
       },
+    );
+  }
+}
+
+class GridAssetTile extends StatefulWidget {
+
+  final String assetMfd, uploadedURL, assetName, assetId;
+
+  GridAssetTile(
+      {this.assetName, this.assetId, this.uploadedURL, this.assetMfd});
+
+  @override
+  _GridAssetTileState createState() => _GridAssetTileState();
+}
+
+class _GridAssetTileState extends State<GridAssetTile> {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ShowFreeService(assetName: widget.assetName,)));
+      },
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(18),
+          child: Container(
+            color: Colors.white,
+            child: Stack(children: <Widget>[
+              Center(child: Image.network(widget.uploadedURL)),
+              Positioned(top:1,
+                  left:2,
+                  right: 2,
+                  child: Text(widget.assetId)),
+              Positioned(right: 1,bottom: 3,child: Text(widget.assetName)),
+              Positioned(right:1,bottom:1,child:Text(widget.assetMfd)),
+            ],),
+          ),
+        ),
+      ),
     );
   }
 }
